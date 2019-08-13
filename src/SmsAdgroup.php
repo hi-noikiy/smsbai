@@ -21,12 +21,12 @@ class  SmsAdgroup{
 
     }
 
-    public function get($fields, $ids)
+    public function get($fields, $ids,$IdType=3)
     {
         $request = new GetAdgroupRequest();
         $request->setIds($ids);
         $request->setAdgroupFields($fields);
-        $request->setIdType(3);
+        $request->setIdType($IdType);
         $config = array('url' => $this->url,
             'username' => $this->username,
             'password' => $this->password,
