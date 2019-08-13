@@ -6,9 +6,9 @@ use jamesluo\smsbai\Lib\CommonService;
 class  AdgroupService extends CommonService
 {
 
-    public function __construct()
+    public function __construct($config)
     {
-        parent::__construct('sms', 'service', 'AdgroupService');
+        parent::__construct('sms', 'service', 'AdgroupService',$config);
     }
 
     // ABSTRACT METHODS
