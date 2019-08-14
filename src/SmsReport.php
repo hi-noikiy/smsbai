@@ -6,7 +6,7 @@ use jamesluo\smsbai\Report\GetRealTimeDataRequest;
 use jamesluo\smsbai\Report\ReportRequestType;
 use jamesluo\smsbai\Report\ReportService;
 
-class  SysReport
+class  SmsReport
 {
     protected $url = '';
     protected $username = '';
