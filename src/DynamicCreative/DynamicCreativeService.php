@@ -3,8 +3,8 @@ namespace  jamesluo\smsbai\DynamicCreative;
 use jamesluo\smsbai\Lib\CommonService;
 
 class DynamicCreativeService extends  CommonService{
-    public function __construct() {
-        parent::__construct ( 'sms', 'service', 'DynamicCreativeService' );
+    public function __construct($config) {
+        parent::__construct ( 'sms', 'service', 'DynamicCreativeService',$config );
     }
 
     // ABSTRACT METHODS

@@ -3,8 +3,8 @@ namespace jamesluo\smsbai\Keyword;
 use jamesluo\smsbai\Lib\CommonService;
 
 class KeywordService extends CommonService{
-    public function __construct() {
-        parent::__construct ( 'sms', 'service', 'KeywordService' );
+    public function __construct($config) {
+        parent::__construct ( 'sms', 'service', 'KeywordService',$config );
     }
 
     // ABSTRACT METHODS
