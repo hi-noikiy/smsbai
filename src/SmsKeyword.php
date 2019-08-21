@@ -37,6 +37,6 @@ class SmsKeyword {
         $k->setIsJson(true);
         $response=$k->getWord($request);
         $head=$k->getJsonHeader();
-        return ['head'=>$head,'data'=>$response->data];
+        return ['head'=>$head,'data'=>isset($response->data)?$response->data:[]];
     }
 }
