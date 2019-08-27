@@ -45,7 +45,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getAllObjects($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head,  'data' => isset($response->data)?$response->data:[]];
     }
 
     function GetAllChangedObjects($campaignIds = array(),$aStartTime = "", $aField = array("all"), $camField = array("all"),$agField=array("all"),$akField=array("all") )
@@ -75,7 +75,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getAllChangedObjects($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head, 'data' => isset($response->data)?$response->data:[]];
     }
 
     function getUserCache($fileId)
@@ -92,7 +92,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getUserCache($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head,  'data' => isset($response->data)?$response->data:[]];
     }
 
     function getFilePath($aFileId)
@@ -109,7 +109,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getFilePath($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head,  'data' => isset($response->data)?$response->data:[]];
     }
 
     function getFileStatus($aFileId)
@@ -126,7 +126,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getFileStatus($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head, 'data' => isset($response->data)?$response->data:[]];
     }
 
     function cancelDownload($aFileId)
@@ -143,7 +143,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->cancelDownload($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head,  'data' => isset($response->data)?$response->data:[]];
     }
 
     function getChangedItemId($startTime = "", $ids = array(), $types = 3, $itemType = 5)
@@ -163,7 +163,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getChangedItemId($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head, 'data' => $response->data];
+        return ['head' => $head,  'data' => isset($response->data)?$response->data:[]];
     }
 
     function getChangedId($startTime)
@@ -183,7 +183,7 @@ class  SmsBulkJob
         $bj = new  BulkJobService($config);
         $response = $bj->getChangedId($request);
         $head = $bj->getJsonHeader();
-        return ['head' => $head,'data'=>$response->data];
+        return ['head' => $head, 'data' => isset($response->data)?$response->data:[]];
     }
 
     function getChangedScale($startTime, $campaignIds = array())
