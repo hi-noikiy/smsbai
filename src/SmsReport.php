@@ -5,6 +5,9 @@ namespace jamesluo\smsbai;
 use jamesluo\smsbai\Report\GetRealTimeDataRequest;
 use jamesluo\smsbai\Report\ReportRequestType;
 use jamesluo\smsbai\Report\ReportService;
+use jamesluo\smsbai\Report\GetProfessionalReportIdRequest;
+use jamesluo\smsbai\Report\GetReportStateRequest;
+use  jamesluo\smsbai\Report\GetReportFileUrlRequest;
 
 class  SmsReport
 {
@@ -146,7 +149,14 @@ class  SmsReport
     {
         $request = new GetReportFileUrlRequest();
         $request->setReportId($reportid);
-        $report = new  ReportService();
+        $config = array('url' => $this->url,
+            'username' => $this->username,
+            'password' => $this->password,
+            'token' => $this->token,
+            'target' => $this->target,
+            'accesstoken' => $this->accesstoken
+        );
+        $report = new  ReportService($config);
         $report->setIsJson(true);
         $response = $report->getReportFileUrl($request);
         $head = $report->getJsonHeader();
