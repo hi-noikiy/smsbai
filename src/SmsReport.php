@@ -145,7 +145,7 @@ class  SmsReport
         return ['head' => $head, 'data' => $response->data];
     }
 
-    public function getReportFileUrlTest($reportid)
+    public function getReportFileUrl($reportid)
     {
         $request = new GetReportFileUrlRequest();
         $request->setReportId($reportid);
