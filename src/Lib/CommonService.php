@@ -71,29 +71,36 @@ class CommonService {
     }
 
     public function executeJson($method, $request) {
-        $ch = curl_init ();
+        try{
+            $ch = curl_init ();
 
-        $url = $this->serviceurl . '/json/' . $this->productline . '/' . $this->version . '/' . $this->serviceName . '/' . $method;
-        //echo $url;
-        curl_setopt ( $ch, CURLOPT_URL, $url );
-        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
-        curl_setopt ( $ch, CURLOPT_POST, true );
+            $url = $this->serviceurl . '/json/' . $this->productline . '/' . $this->version . '/' . $this->serviceName . '/' . $method;
+            //echo $url;
+            curl_setopt ( $ch, CURLOPT_URL, $url );
+            curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+            curl_setopt ( $ch, CURLOPT_POST, true );
 
-        $jsonEv = new JsonEnvelop ( );
+            $jsonEv = new JsonEnvelop ( );
 
-        $jsonEv->setBody ( $request );
-        $jsonEv->setHeader ( $this->authHeader );
-        $data = json_encode ( $jsonEv );
-        curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data ); //$data是每个接口的json字符串
-        curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false ); //不加会报证书问题
-        curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, false ); //不加会报证书问题
-        curl_setopt ( $ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json; charset=utf-8' ) );
+            $jsonEv->setBody ( $request );
+            $jsonEv->setHeader ( $this->authHeader );
+            $data = json_encode ( $jsonEv );
+            curl_setopt ( $ch, CURLOPT_POSTFIELDS, $data ); //$data是每个接口的json字符串
+            curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false ); //不加会报证书问题
+            curl_setopt ( $ch, CURLOPT_SSL_VERIFYHOST, false ); //不加会报证书问题
+            curl_setopt ( $ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json; charset=utf-8' ) );
 
-        $this->json_string = curl_exec ( $ch );
-        curl_close ($ch );
-        $this->json_result = json_decode ( $this->json_string );
-
-        return $this->json_result->body;
+            $this->json_string = curl_exec ( $ch );
+            curl_close ($ch );
+            $this->json_result = json_decode ( $this->json_string );
+            if(isset($this->json_result)&&isset($this->json_result->body)) {
+                return $this->json_result->body;
+            }else{
+                return $this->json_result;
+            }
+        }catch (\Exception $e){
+            var_dump($e);
+        }
     }
     public function executeSoap($method, $request) {
         $this->soapClient = new \SoapClient ( $this->serviceurl . '/sem/' . $this->productline . '/' . $this->version . '/' . $this->serviceName . '?wsdl', array ('trace' => TRUE, 'connection_timeout' => 30 ) );
@@ -119,7 +126,11 @@ class CommonService {
         return $this->soap_headers;
     }
     public function getJsonHeader() {
-        return $this->json_result->header;
+        if(isset($this->json_result)&&isset($this->json_result->header)){
+            return $this->json_result->header;
+        }else{
+            return null;
+        }
     }
     public function getJsonEnv() {
         return $this->json_result;
